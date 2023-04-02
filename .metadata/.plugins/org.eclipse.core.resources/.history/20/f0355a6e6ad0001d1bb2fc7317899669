@@ -1,0 +1,54 @@
+package Solution5;
+
+import java.util.Arrays;
+
+//HashMap을 사용하지 않고 문제를 풀었다.
+public class Solu5Prac {
+	
+	public int[] solution(String s) {
+		//우선 배열안의 크기가 5개인 배열을 생성한다.
+		int[] answer = new int[5];
+		//파라미터로 넘어온 문자열을 text에 담는다.
+		String text = s;
+		//문자열의 길이만큼한 char배열을 생성한다.
+		char[] charArr = new char[text.length()];
+		
+		//charArr배열의 갯수가 즉 문자열의 길이만큼이기때문에 그만큼의 반복을 돈다.
+		for (int i = 0; i < charArr.length; i++) {
+			//문자열을 문자하나하나로 splittext변수에 담고
+			charArr[i] = text.charAt(i);
+		}
+
+		int[] alphabet = new int[5];
+
+		for (int i = 0; i < charArr.length; i++) {
+			alphabet[(int) charArr[i] - 97] += 1;
+		}
+
+		int max = alphabet[0];
+		for (int i = 1; i < alphabet.length; i++) {
+			if (alphabet[i] > max) {
+				max = alphabet[i];
+			}
+		}
+
+		for (int i = 0; i < alphabet.length; i++) {
+			if (alphabet[i] == max) {
+				answer[i] = 0;
+			} else if (alphabet[i] < max) {
+				int number = max - alphabet[i];
+				answer[i] = number;
+			}
+		}
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		Solu5Prac T = new Solu5Prac();
+		System.out.println(Arrays.toString(T.solution("aaabc")));
+		System.out.println(Arrays.toString(T.solution("aabb")));
+		System.out.println(Arrays.toString(T.solution("abcde")));
+		System.out.println(Arrays.toString(T.solution("abcdeabc")));
+		System.out.println(Arrays.toString(T.solution("abbccddee")));
+	}
+}

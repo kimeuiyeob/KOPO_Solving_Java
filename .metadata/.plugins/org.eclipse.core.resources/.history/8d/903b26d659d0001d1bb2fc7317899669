@@ -1,0 +1,35 @@
+package Solution4;
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution4 {
+
+	public int solution(String s) {
+
+		int answer = 0;
+
+		String[] alphabet = new String[s.length()];
+
+		for (int i = 0; i < s.length(); i++) {
+			alphabet[i] = String.valueOf(s.charAt(i));
+		}
+		
+		Map<String, Integer> hm = new HashMap<>();
+		
+		for (String key : alphabet)
+			hm.put(key, hm.getOrDefault(key, 0) + 1);
+
+		System.out.println(hm);
+
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		Solution4 T = new Solution4();
+		System.out.println(T.solution("statitsics"));
+//		System.out.println(T.solution("aabb"));
+//		System.out.println(T.solution("stringshowtime"));
+//		System.out.println(T.solution("abcdeabcdfg"));
+	}
+}

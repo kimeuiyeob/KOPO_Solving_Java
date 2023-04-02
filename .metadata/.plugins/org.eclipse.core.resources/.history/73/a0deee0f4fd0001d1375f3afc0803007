@@ -1,0 +1,87 @@
+package Solution3;
+
+public class Practice {
+
+	public int solution(int[][] board) {
+
+		int FinishLine = board.length;
+		int[] directionX = { -1, 0, 1, 0 };
+		int[] directionY = { 0, 1, 0, -1 };
+
+		int humanX = 0, humanY = 0;
+		int dogX = 0, dogY = 0;
+
+		int directionForHuman = 0;
+		int directionForDog = 0;
+
+		int count = 0;
+//		===================================================
+		// 이차원 배열 반복통해 사람과 강아지 위치 찾기
+		for (int i = 0; i < board.length; i++) {
+			int[] boards = board[i];
+			for (int j = 0; j < boards.length; j++) {
+				if (board[i][j] == 2) {
+					humanX = i;
+					humanY = j;
+				}
+				if (board[i][j] == 3) {
+					dogX = i;
+					dogY = j;
+				}
+			}
+		}
+//		===================================================
+		while (count < 10000) {
+			boolean flag1 = true, flag2 = true;
+			count++;
+			// 사람 좌표
+			int HX = humanX + directionX[directionForHuman];
+			int HY = humanY + directionY[directionForHuman];
+			// 강아지 좌표
+			int DX = dogX + directionX[directionForDog];
+			int DY = dogY + directionY[directionForDog];
+
+			if (HX < 0 || HX >= FinishLine || HY < 0 || HY >= FinishLine || board[HX][HY] == 1) {
+				directionForHuman = (directionForHuman + 1) % 4;
+				flag1 = false;
+			}
+
+			if (DX < 0 || DX >= FinishLine || DY < 0 || DY >= FinishLine || board[DX][DY] == 1) {
+				directionForDog = (directionForDog + 1) % 4;
+				flag1 = false;
+			}
+
+			if (flag1 == true) {
+				humanX = HX;
+				humanY = HY;
+			}
+			if (flag2 == true) {
+				dogX = DX;
+				dogY = DY;
+			}
+			if (HX == DX && HY == DY) {
+				break;
+			}
+		}
+		if (count >= 10000) {
+			return 0;
+		}
+		return count;
+	}
+
+	public static void main(String[] args) {
+
+		Practice T = new Practice();
+		int[][] arr1 = { { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0, 2, 0, 0 },
+				{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 0 }, { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 3, 0, 0, 0, 1 },
+				{ 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 }, { 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 } };
+		System.out.println(T.solution(arr1));
+		int[][] arr2 = { { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
+				{ 0, 0, 1, 1, 0, 0, 0, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 },
+				{ 1, 0, 0, 0, 0, 0, 1, 0, 1, 0 }, { 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, { 0, 0, 1, 0, 0, 0, 0, 0, 2, 1 },
+				{ 0, 0, 0, 1, 0, 1, 0, 0, 0, 1 }, { 0, 1, 0, 1, 0, 0, 0, 0, 0, 3 } };
+		System.out.println(T.solution(arr2));
+	}
+
+}

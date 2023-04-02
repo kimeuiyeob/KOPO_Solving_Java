@@ -1,0 +1,55 @@
+package Solution2;
+
+import java.util.Arrays;
+
+class Solution2 {
+	public int[] solution(int[][] board, int k) {
+		//리턴해줄 배열 값
+		int[] answer = new int[2];
+		//총 길이를 알기 위한 변수
+		int finishLine = board.length;
+		
+		int[] directionX = { -1, 0, 1, 0 };
+		int[] directionY = { 0, 1, 0, -1 };
+		
+		//현재 로봇 위치 설정
+		int x = 0;
+		int y = 0;
+		//반향설정 -> 오른쪽 
+		int direction = 1;
+		int count = 0;
+		
+		while (count < k) {
+			
+			count++;
+			int nx = x + directionX[direction];
+			int ny = y + directionY[direction];
+			
+			if (nx < 0 || nx >= finishLine || ny < 0 || ny >= finishLine || board[nx][ny] == 1) {
+				d = (d + 1) % 4;
+				continue;
+			}
+			
+			x = nx;
+			y = ny;
+		}
+		
+		answer[0] = x;
+		answer[1] = y;
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		Solution2 T = new Solution2();
+		int[][] arr1 = { { 0, 0, 0, 0, 0 }, { 0, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0 }, { 1, 0, 1, 0, 1 },
+				{ 0, 0, 0, 0, 0 } };
+		System.out.println(Arrays.toString(T.solution(arr1, 10)));
+		int[][] arr2 = { { 0, 0, 0, 1, 0, 1 }, { 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 1 }, { 1, 1, 0, 0, 1, 0 },
+				{ 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0 } };
+		System.out.println(Arrays.toString(T.solution(arr2, 20)));
+		int[][] arr3 = { { 0, 0, 1, 0, 0 }, { 0, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0 }, { 1, 0, 0, 0, 1 },
+				{ 0, 0, 0, 0, 0 } };
+		System.out.println(Arrays.toString(T.solution(arr3, 25)));
+
+	}
+}

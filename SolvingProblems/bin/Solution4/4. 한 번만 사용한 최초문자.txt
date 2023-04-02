@@ -1,0 +1,15 @@
+class Solution {
+	public int solution(String s){
+		int answer = 0;
+
+		return answer;
+	}
+
+	public static void main(String[] args){
+		Solution T = new Solution();
+		System.out.println(T.solution("statitsics"));
+		System.out.println(T.solution("aabb"));
+		System.out.println(T.solution("stringshowtime"));
+		System.out.println(T.solution("abcdeabcdfg"));
+	}
+}

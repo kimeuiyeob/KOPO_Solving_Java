@@ -1,0 +1,53 @@
+package Solution5;
+
+import java.util.Arrays;
+
+public class Solution5 {
+
+	public int[] solution(String s) {
+		
+		int[] answer = new int[5];
+
+		String text = s;
+
+		char[] charArr = new char[text.length()];
+		char splitext;
+
+		for (int i = 0; i < charArr.length; i++) {
+			splitext = text.charAt(i);
+			charArr[i] = splitext;
+		}
+
+		int[] alphabet = new int[5];
+
+		for (int i = 0; i < charArr.length; i++) {
+			alphabet[(int) charArr[i] - 97] += 1;
+		}
+
+		int max = alphabet[0];
+		for (int i = 1; i < alphabet.length; i++) {
+			if (alphabet[i] > max) {
+				max = alphabet[i];
+			}
+		}
+
+		for (int i = 0; i < alphabet.length; i++) {
+			if (alphabet[i] == max) {
+				answer[i] = 0;
+			} else if (alphabet[i] < max) {
+				int number = max - alphabet[i];
+				answer[i] = number;
+			}
+		}
+		return answer;
+	}
+
+	public static void main(String[] args) {
+		Solu5Prac T = new Solu5Prac();
+		System.out.println(Arrays.toString(T.solution("aaabc")));
+		System.out.println(Arrays.toString(T.solution("aabb")));
+		System.out.println(Arrays.toString(T.solution("abcde")));
+		System.out.println(Arrays.toString(T.solution("abcdeabc")));
+		System.out.println(Arrays.toString(T.solution("abbccddee")));
+	}
+}
