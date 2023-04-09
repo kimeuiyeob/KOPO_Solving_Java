@@ -17,20 +17,13 @@ public class Solution4 {
 		Arrays.sort(nums);
 		// ++시켜줄 변수 생성
 		int indexUp = 0;
-		
-		System.out.println("넘어온 배열 : " + Arrays.toString(nums));
-		System.out.println("MAP : " + nH);
-		
 		for (int x : nums) {
-			
 			if (nH.get(x) == 0) {
 				continue;
 			}
-
 			// 배열에 값을 담아준다.
 			answer[indexUp] = x;
 			indexUp++;
-
 			// 그전에 nH에 누적된 숫자들을 여기서 빼준다.
 			// 이렇게 되면 두개씩 빠지게된다.
 			nH.put(x, nH.get(x) - 1);

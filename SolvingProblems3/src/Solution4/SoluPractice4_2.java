@@ -16,22 +16,17 @@ public class SoluPractice4_2 {
 		Arrays.sort(nums);
 		int count = 0;
 		System.out.println(HM);
-
 		for (int i : nums) {
 			if (HM.get(i) == 0) {
 				continue;
 			}
-
 			answer[count] = i;
 			count++;
-
 			// HM에 누적시켜놓은 밸류값을 여기서 차감
 			// 선생값과 학생값을 뺀다.
 			HM.put(i, HM.get(i) - 1);
 			HM.put(i * 2, HM.get(i * 2) - 1);
-
 		}
-
 		return answer;
 	}
 

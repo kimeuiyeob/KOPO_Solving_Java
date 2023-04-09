@@ -7,9 +7,9 @@ public class Solution2 {
 	public int solution(int[] keypad, String password) {
 
 		int answer = 0;
-
 		int[] dx = { -1, -1, 0, 1, 1, 1, 0, -1 };
 		int[] dy = { 0, 1, 1, 1, 0, -1, -1, -1 };
+
 		int[][] pad = new int[3][3];
 		int[][] dist = new int[10][10];
 		for (int i = 0; i < 3; i++) {
@@ -17,9 +17,11 @@ public class Solution2 {
 				pad[i][j] = keypad[i * 3 + j];
 			}
 		}
+
 		for (int i = 0; i < 10; i++) {
 			Arrays.fill(dist[i], 2);
 		}
+
 		for (int i = 0; i < 10; i++)
 			dist[i][i] = 0;
 		for (int i = 0; i < 3; i++) {

@@ -8,12 +8,15 @@ public class Solution4 {
 
 		int answer = 0;
 		HashMap<Integer, Integer> nH = new HashMap<>();
+		
 		int sum = 0;
 		nH.put(0, 1);
+		
 		for (int x : nums) {
 			sum += x;
-			if (nH.containsKey(sum - m))
+			if (nH.containsKey(sum - m)) {
 				answer += nH.get(sum - m);
+			}
 			nH.put(sum, nH.getOrDefault(sum, 0) + 1);
 		}
 
@@ -23,9 +26,9 @@ public class Solution4 {
 	public static void main(String[] args) {
 		Solution4 T = new Solution4();
 		System.out.println(T.solution(new int[] { 2, 2, 3, -1, -1, -1, 3, 1, 1 }, 5));
-//		System.out.println(T.solution(new int[]{1, 2, 3, -3, 1, 2, 2, -3}, 5));	
-//		System.out.println(T.solution(new int[]{1, 2, 3, -3, 1, 2}, 3));	
-//		System.out.println(T.solution(new int[]{-1, 0, 1}, 0));	
-//		System.out.println(T.solution(new int[]{-1, -1, -1, 1}, 0));	
+		System.out.println(T.solution(new int[]{1, 2, 3, -3, 1, 2, 2, -3}, 5));	
+		System.out.println(T.solution(new int[]{1, 2, 3, -3, 1, 2}, 3));	
+		System.out.println(T.solution(new int[]{-1, 0, 1}, 0));	
+		System.out.println(T.solution(new int[]{-1, -1, -1, 1}, 0));	
 	}
 }
