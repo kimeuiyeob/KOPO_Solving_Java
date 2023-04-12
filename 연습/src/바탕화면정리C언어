@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <limits.h>
+
+int* solution(char** wallpaper, int wallpaperSize) {
+    int smallLength = 0;
+    for (int i = 0; i < wallpaperSize; i++) {
+        int length = 0;
+        while (wallpaper[i][length] != '\0') {
+            length++;
+        }
+        smallLength = length > smallLength ? length : smallLength;
+    }
+
+    char intArr[wallpaperSize][smallLength];
+
+    for (int i = 0; i < wallpaperSize; i++) {
+        char* paper = wallpaper[i];
+        int j = 0;
+        while (paper[j] != '\0') {
+            intArr[i][j] = paper[j];
+            j++;
+        }
+        while (j < smallLength) {
+            intArr[i][j] = '\0';
+            j++;
+        }
+    }
+
+    int* number1 = malloc(sizeof(int) * wallpaperSize * smallLength);
+    int* number2 = malloc(sizeof(int) * wallpaperSize * smallLength);
+    int index = 0;
+
+    for (int i = 0; i < wallpaperSize; i++) {
+        for (int j = 0; j < smallLength; j++) {
+            if (intArr[i][j] == '#') {
+                number1[index] = i;
+                number2[index] = j;
+                index++;
+            }
+        }
+    }
+
+    int minNum1 = INT_MAX;
+    int minNum2 = INT_MAX;
+    int maxNum1 = INT_MIN;
+    int maxNum2 = INT_MIN;
+
+    for (int i = 0; i < index; i++) {
+        if (minNum1 > number1[i]) {
+            minNum1 = number1[i];
+        }
+        if (minNum2 > number2[i]) {
+            minNum2 = number2[i];
+        }
+        if (maxNum1 < number1[i]) {
+            maxNum1 = number1[i];
+        }
+        if (maxNum2 < number2[i]) {
+            maxNum2 = number2[i];
+        }
+    }
+
+    int* answer = malloc(sizeof(int) * 4);
+    answer[0] = minNum1;
+    answer[1] = minNum2;
+    answer[2] = maxNum1 + 1;
+    answer[3] = maxNum2 + 1;
+    return answer;
+}
+
+int main() {
+
+    char* wallpaper1[] = { ".#...", "..#..", "...#." };
+    int* answer1 = solution(wallpaper1, 3);
+    printf("[%d, %d, %d, %d]\n", answer1[0], answer1[1], answer1[2], answer1[3]);
+    free(answer1);
+
+    char* wallpaper2[] = { "..........", ".....#....", "......##..", "...##.....", "....#....." };
+    int* answer2 = solution(wallpaper2, 5);
+    printf("[%d, %d, %d, %d]\n", answer2[0], answer2[1], answer2[2], answer2[3]);
+    free(answer2);
+    
+}
